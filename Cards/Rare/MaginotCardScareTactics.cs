@@ -5,7 +5,7 @@ using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
+internal sealed class MaginotCardScareTactics : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -15,10 +15,10 @@ internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
 			Meta = new CardMeta
 			{
 				deck = ModEntry.Instance.MaginotDeck.Deck,
-				rarity = Rarity.common,
+				rarity = Rarity.rare,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryShot", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ScareTactics", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -28,16 +28,23 @@ internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
 		return new CardData
 		{
 			cost = 2,
-			exhaust = upgrade == Upgrade.B
+			exhaust = true,
+			retain = upgrade == Upgrade.A
 		};
 	}
 
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
 		return [
+			new AStatus
+			{
+				status = Status.autododgeLeft,
+				statusAmount = 1,
+				targetPlayer = false
+			},
 			new AAttack
 			{
-				damage = GetDmg(s, upgrade == Upgrade.A ? 5 : upgrade == Upgrade.B ? 7 : 3)
+				damage = GetDmg(s, upgrade == Upgrade.B ? 16 : 8)
 			}
 		];
 	}

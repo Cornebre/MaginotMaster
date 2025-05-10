@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
+internal sealed class MaginotCardECM : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -15,10 +15,10 @@ internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
 			Meta = new CardMeta
 			{
 				deck = ModEntry.Instance.MaginotDeck.Deck,
-				rarity = Rarity.common,
+				rarity = Rarity.uncommon,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryShot", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ECM", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -28,16 +28,18 @@ internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
 		return new CardData
 		{
 			cost = 2,
-			exhaust = upgrade == Upgrade.B
+			exhaust = upgrade != Upgrade.B
 		};
 	}
 
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
 		return [
-			new AAttack
+			new AStatus
 			{
-				damage = GetDmg(s, upgrade == Upgrade.A ? 5 : upgrade == Upgrade.B ? 7 : 3)
+				status = Status.backwardsMissiles,
+				statusAmount = upgrade == Upgrade.A ? 4 : 2,
+				targetPlayer = false
 			}
 		];
 	}

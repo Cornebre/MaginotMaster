@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-//using Cornebre.Maginot.Actions;
+using Cornebre.Maginot.Actions;
 //using Cornebre.Maginot.Artifacts;
 using Cornebre.Maginot.Cards;
 using Cornebre.Maginot.External;
@@ -37,16 +37,27 @@ internal class ModEntry : SimpleMod
 		typeof(MaginotCardBrace),
 		typeof(MaginotCardBuildUp),
 		typeof(MaginotCardFrontLine),
+		typeof(MaginotCardHammerThrough),
 		typeof(MaginotCardHeavyCaltrops),
 		typeof(MaginotCardHoldTheLine),
-		typeof(MaginotCardPowerToShields)
+		typeof(MaginotCardMobileFort),
+		typeof(MaginotCardPowerToShields),
 	];
 	private static readonly List<Type> MaginotUncommonCardTypes = [
-		typeof(MaginotCardBunkerDown)
+		typeof(MaginotCardBunkerDown),
+		typeof(MaginotCardCoverShot),
+		typeof(MaginotCardECM),
+		typeof(MaginotCardPavis),
+		typeof(MaginotCardTwinArtillery),
 	];
 	private static readonly List<Type> MaginotRareCardTypes = [
+		typeof (MaginotCardAllOrBurst),
+		typeof (MaginotCardArtilleryBarrage),
+		typeof (MaginotCardNastySurprise),
+		typeof (MaginotCardScareTactics),
 	];
 	private static readonly List<Type> MaginotSpecialCardTypes = [
+		typeof (MAginotCardArtilleryShell),
 	];
 	private static readonly IEnumerable<Type> MaginotCardTypes =
 		MaginotCommonCardTypes
@@ -70,7 +81,6 @@ internal class ModEntry : SimpleMod
 	{
 		Instance = this;
 		Harmony = new Harmony("Cornebre.Maginot");
-		MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("Cornebre.Maginot");
 		
 		/*
 		 * Some mods provide an API, which can be requested from the ModRegistry.
@@ -158,16 +168,22 @@ internal class ModEntry : SimpleMod
 			},
 			Description = AnyLocalizations.Bind(["character", "desc"]).Localize
 		});
-		
-		MoreDifficultiesApi?.RegisterAltStarters(MaginotDeck.Deck, new StarterDeck
-		{
-			cards = [
-				new MaginotCardArtilleryShot(),
-				new MaginotCardFrontLine()
-			],
-				artifacts = [
-			]
-		});
+
+		helper.ModRegistry.AwaitApi<IMoreDifficultiesApi>(
+			"TheJazMaster.MoreDifficulties",
+			api => api.RegisterAltStarters(
+				deck: MaginotDeck.Deck,
+				starterDeck: new StarterDeck
+				{
+					cards = [
+						new MaginotCardArtilleryShot(),
+						new MaginotCardFrontLine()
+					],
+					artifacts = [
+					]
+				}
+			)
+		);
 
 		/*
 		 * Statuses are used to achieve many mechanics.
@@ -207,12 +223,8 @@ internal class ModEntry : SimpleMod
 
 		/*
 		 * Some classes require so little management that a manager may not be worth writing.
-		 * In AGainPonder's case, it is simply a need for two sprites and evaluation of an artifact's effect.
 		 */
-		// AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
-		// AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
-		
-		// AOverthink.Spr = RegisterSprite(package, "assets/overthink.png").Sprite;
+		MaginotActionNastySurprise.Spr = RegisterSprite(package, "assets/Icons/nastySurprise.png").Sprite;
 	}
 
 	/*

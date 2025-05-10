@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
+using Cornebre.Maginot.Actions;
 using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardBrace : Card, IRegisterable
+internal sealed class MaginotCardNastySurprise : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -16,10 +16,10 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 			Meta = new CardMeta
 			{
 				deck = ModEntry.Instance.MaginotDeck.Deck,
-				rarity = Rarity.common,
+				rarity = Rarity.rare,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Brace", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "NastySurprise", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -28,8 +28,7 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 0,
-			infinite = upgrade == Upgrade.A,
+			cost = upgrade == Upgrade.A ? 1 : 2,
 			retain = upgrade == Upgrade.B
 		};
 	}
@@ -37,19 +36,35 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
 		return [
-			ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
-				ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
-					ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(Status.shield),
-					1
-				),
-				new AStatus
-				{
-					status = Status.tempShield,
-					statusAmount = upgrade == Upgrade.B ? 3 : 2,
-					disabled = flipped,
-					targetPlayer = true
-				}
-			).AsCardAction,
+			new MaginotActionNastySurprise
+			{
+				Count = 1
+			},
+			new AStatus
+			{
+				status = Status.shield,
+				statusAmount = 1,
+				targetPlayer = true
+			}
 		];
+	}
+	
+	private int GetTempShieldAmt(State s)
+	{
+		int result = 0;
+		if (s.route is Combat)
+		{
+			result = s.ship.Get(Status.tempShield);
+		}
+		return result;
+	}
+	private int GetEvadeAmt(State s)
+	{
+		int result = 0;
+		if (s.route is Combat)
+		{
+			result = s.ship.Get(Status.evade);
+		}
+		return result;
 	}
 }

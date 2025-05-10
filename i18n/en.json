@@ -14,14 +14,9 @@
         }
     },
     "action": {
-        "AGainPonder": {
-            "title": "Gain Ponder",
-            "draw": "Add <c=boldPink>{{Count}}</c> <c=card>Ponder</c>s to your <c=white>draw pile</c>.",
-            "discard": "Add <c=boldPink>{{Count}}</c> <c=card>Ponder</c>s to your <c=white>discard pile</c>."
-        },
-        "AOverthink": {
-            "title": "Overthink",
-            "desc": "Discard a <c=card>Ponder</c> in hand, or in the draw pile."
+        "NastySurprise": {
+            "title": "Nasty Surprise",
+            "description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>mines</c>."
         }
     },
     "card": {
@@ -48,6 +43,55 @@
         },
         "ArtilleryShot": {
             "name": "Artillery Shot"
+        },
+        "ArtilleryShell": {
+            "name": "Artillery Shell"
+        },
+        "MobileFort": {
+            "name": "Mobile Fort"
+        },
+        "CoverShot": {
+            "name": "Cover Shot"
+        },
+        "TwinArtillery": {
+            "name": "Twin Artillery"
+        },
+        "AllOrBurst": {
+            "name": "All Or Burst"
+        },
+        "ScareTactics": {
+            "name": "Scare Tactics"
+        },
+        "ArtilleryBarrage": {
+            "name": "Artillery Barrage",
+            "description": {
+                "None": "Add three <c=card>Artillery Shell A</c> to your hand.",
+                "A": "Add four <c=card>Artillery Shell A</c> to your hand.",
+                "B": "Add three <c=card>Artillery Shell A</c> to your hand and two to your draw."
+            }
+        },
+        "NastySurprise": {
+            "name": "Nasty Surprise",
+            "description": {
+                "None": "Add three <c=card>Artillery Shell A</c> to your hand.",
+                "A": "Add four <c=card>Artillery Shell A</c> to your hand.",
+                "B": "Add three <c=card>Artillery Shell A</c> to your hand and two to your draw."
+            }
+        },
+        "ECM": {
+            "name": "E.C.M."
+        },
+        "HammerThrough": {
+            "name": "Hammer Through",
+            "description": {
+                "None": "Artillery <c=keyword>{0}</c>. +1 for every time played this combat.",
+                "A": "Draw 1.\nArtillery <c=keyword>{0}</c>. +1 for every time played this combat.",
+                "B": "Artillery <c=keyword>{0}</c>. +2 for every time played this combat."
+            }
+        },
+        "Pavis": {
+            "name": "Pavis",
+            "description": "Temporary Shield = total dmg of enemy's cannon attack: {0}."
         }
     },
     "artifact": {

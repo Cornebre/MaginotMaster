@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
@@ -6,7 +5,7 @@ using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardBrace : Card, IRegisterable
+internal sealed class MaginotCardPavis : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -16,10 +15,10 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 			Meta = new CardMeta
 			{
 				deck = ModEntry.Instance.MaginotDeck.Deck,
-				rarity = Rarity.common,
+				rarity = Rarity.uncommon,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Brace", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Pavis", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -28,8 +27,9 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 0,
-			infinite = upgrade == Upgrade.A,
+			cost = 3,
+			description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "Pavis", "description"]), GetPavisTotal(state)),
+			exhaust = upgrade != Upgrade.A,
 			retain = upgrade == Upgrade.B
 		};
 	}
@@ -37,19 +37,27 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
 		return [
-			ModEntry.Instance.KokoroApi.ActionCosts.MakeCostAction(
-				ModEntry.Instance.KokoroApi.ActionCosts.MakeResourceCost(
-					ModEntry.Instance.KokoroApi.ActionCosts.MakeStatusResource(Status.shield),
-					1
-				),
-				new AStatus
-				{
-					status = Status.tempShield,
-					statusAmount = upgrade == Upgrade.B ? 3 : 2,
-					disabled = flipped,
-					targetPlayer = true
-				}
-			).AsCardAction,
+			new AStatus
+			{
+				status = Status.tempShield,
+				statusAmount = GetPavisTotal(s),
+				targetPlayer = true
+			}
 		];
+	}
+	private int GetPavisTotal(State s)
+	{
+		int num = 0;
+		if (s.route is Combat combat)
+		{
+			foreach (Part part in combat.otherShip.parts)
+			{
+				if (part.intent is IntentAttack intentAttack)
+				{
+					num += GetDmg(s, intentAttack.damage, targetPlayer: true) * intentAttack.multiHit;
+				}
+			}
+		}
+		return num;
 	}
 }

@@ -1,16 +1,16 @@
 {
-  "UniqueName": "Cornebre.Maginot",
-  "Version": "0.2.0",
-  "Author": "Cornebre",
-  "DisplayName": "Maginot",
-  "Description": "Description goes here you pineapple head. Don't you dare forget.",
-  "RequiredApiVersion": "1.15.0",
-  "EntryPointAssembly": "Maginot.dll",
-  "LoadPhase": "AfterDbInit",
-  "Dependencies": [
-    {
-      "UniqueName": "Shockah.Kokoro",
-      "Version": "2.6.0"
-    }
-  ]
+	"UniqueName": "Cornebre.Maginot",
+	"Version": "0.2.0",
+	"Author": "Cornebre",
+	"DisplayName": "Maginot",
+	"Description": "Your military advisor. His cards bring a lot of shield and midrow objects, with a dash of midrow ignoring weapons.",
+	"RequiredApiVersion": "1.15.0",
+	"EntryPointAssembly": "Maginot.dll",
+	"LoadPhase": "AfterDbInit",
+	"Dependencies": [
+		{
+			"UniqueName": "Shockah.Kokoro",
+			"Version": "2.6.0"
+		}
+	]
 }

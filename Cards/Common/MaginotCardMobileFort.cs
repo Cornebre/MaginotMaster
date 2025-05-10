@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
+internal sealed class MaginotCardMobileFort : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,7 +18,7 @@ internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
 				rarity = Rarity.common,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryShot", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "MobileFort", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -27,18 +27,28 @@ internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 2,
-			exhaust = upgrade == Upgrade.B
+			cost = upgrade == Upgrade.A ? 1 : 2
 		};
 	}
 
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
 		return [
-			new AAttack
+			new ASpawn
 			{
-				damage = GetDmg(s, upgrade == Upgrade.A ? 5 : upgrade == Upgrade.B ? 7 : 3)
+				thing = new Asteroid
+				{
+					yAnimation = 0.0,
+					bubbleShield = upgrade == Upgrade.B
+				}
+			},
+			new AStatus
+			{
+				status = Status.droneShift,
+				statusAmount = 2,
+				targetPlayer = true
 			}
 		];
 	}
 }
+
