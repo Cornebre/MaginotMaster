@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>Cornebre.Maginot</RootNamespace>
+		<Version>0.2.0</Version>
+
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>Nullable</WarningsAsErrors>
+		<!--
+		<ModLoaderPath>$(MSBuildProjectDirectory)\..\..\..\..\..\..\Games\Nickel</ModLoaderPath>
+		<ModZipPath>$(MSBuildProjectDirectory)\.release\$(MSBuildProjectName)-$(Version).zip</ModZipPath>
+		<GameDllPath>$(MSBuildProjectDirectory)\..\..\..\Decompiled\CobaltCore.dll</GameDllPath>
+		-->
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Nickel.ModBuildConfig" Version="2.0.2" />
+		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" PrivateAssets="all" ExcludeAssets="runtime">
+		  <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ModFiles Include="i18n/**" />
+		<ModFiles Include="assets/**" />
+<!--		<ModFiles Include="i18n/**" ModPath="i18n/%(RecursiveDir)%(Filename)%(Extension)" />-->
+<!--		<ModFiles Include="assets/**" ModPath="assets/%(RecursiveDir)%(Filename)%(Extension)" />-->
+	</ItemGroup>
+</Project>
