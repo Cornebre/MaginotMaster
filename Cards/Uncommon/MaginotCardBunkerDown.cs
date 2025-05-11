@@ -36,14 +36,6 @@ internal sealed class MaginotCardBunkerDown : Card, IRegisterable
 	{
 		return upgrade switch
 		{
-			Upgrade.A => [
-				new AStatus
-				{
-					status = Status.maxShield,
-					statusAmount = 5,
-					targetPlayer = true
-				}
-			],
 			Upgrade.B => [
 				new AStatus
 				{
@@ -62,7 +54,7 @@ internal sealed class MaginotCardBunkerDown : Card, IRegisterable
 				new AStatus
 				{
 					status = Status.maxShield,
-					statusAmount = 3,
+					statusAmount = upgrade == Upgrade.A ? 5 : 3,
 					targetPlayer = true
 				}
 			]

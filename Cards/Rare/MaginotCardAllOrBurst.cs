@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Cornebre.Maginot.Actions;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -43,11 +44,11 @@ internal sealed class MaginotCardAllOrBurst : Card, IRegisterable
 					statusAmount = 1,
 					targetPlayer = true
 				},
-				new AVariableHint
+				new MaginotActionMaxShieldHint
 				{
 					status = Status.maxShield
 				},
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, GetMaxShieldAmt(s) * 2),
 					xHint = 2
@@ -57,16 +58,15 @@ internal sealed class MaginotCardAllOrBurst : Card, IRegisterable
 					status = Status.maxShield,
 					statusAmount = - s.ship.GetMaxShield(),
 					xHint = -1,
-					targetPlayer = true,
-					omitFromTooltips = true
+					targetPlayer = true
 				}
 			],
 			Upgrade.B => [
-				new AVariableHint
+				new MaginotActionMaxShieldHint
 				{
 					status = Status.maxShield
 				},
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, GetMaxShieldAmt(s) * 2),
 					xHint = 2
@@ -76,24 +76,22 @@ internal sealed class MaginotCardAllOrBurst : Card, IRegisterable
 					status = Status.maxShield,
 					statusAmount = 0,
 					mode = AStatusMode.Set,
-					targetPlayer = true,
-					omitFromTooltips = true
+					targetPlayer = true
 				},
 				new AStatus
 				{
 					status = Status.shield,
 					statusAmount = 0,
 					mode = AStatusMode.Set,
-					targetPlayer = true,
-					omitFromTooltips = true
+					targetPlayer = true
 				}
 			],
 			_ => [
-				new AVariableHint
+				new MaginotActionMaxShieldHint
 				{
 					status = Status.maxShield
 				},
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, GetMaxShieldAmt(s) * 2),
 					xHint = 2
@@ -103,8 +101,7 @@ internal sealed class MaginotCardAllOrBurst : Card, IRegisterable
 					status = Status.maxShield,
 					statusAmount = - s.ship.GetMaxShield(),
 					xHint = -1,
-					targetPlayer = true,
-					omitFromTooltips = true
+					targetPlayer = true
 				}
 			]
 		};

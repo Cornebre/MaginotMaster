@@ -10,8 +10,8 @@ using Cornebre.Maginot.Actions;
 //using Cornebre.Maginot.Artifacts;
 using Cornebre.Maginot.Cards;
 using Cornebre.Maginot.External;
+using Cornebre.Maginot.Features;
 //using TheJazMaster.MoreDifficulties;
-//using Cornebre.Maginot.Features;
 
 namespace Cornebre.Maginot;
 
@@ -21,17 +21,14 @@ internal class ModEntry : SimpleMod
 	internal Harmony Harmony;
 	internal IKokoroApi.IV2 KokoroApi;
 	internal IDeckEntry MaginotDeck;
-	// internal IStatusEntry KnowledgeStatus;
-	// internal IStatusEntry LessonStatus;
+	internal IStatusEntry MaginotManagerArtilleryBank;
+	internal IStatusEntry MaginotManagerArmored;
+	internal IStatusEntry MaginotManagerAutoShield;
+	internal IStatusEntry MaginotManagerAutoTempShield;
 	internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
 	internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
 	internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
 
-	/*
-	 * The following lists contain references to all types that will be registered to the game.
-	 * All cards and artifacts must be registered before they may be used in the game.
-	 * In theory only one collection could be used, containing all registrable types, but it is seperated this way for ease of organization.
-	 */
 	private static readonly List<Type> MaginotCommonCardTypes = [
 		typeof(MaginotCardArtilleryShot),
 		typeof(MaginotCardBrace),
@@ -47,11 +44,14 @@ internal class ModEntry : SimpleMod
 		typeof(MaginotCardBunkerDown),
 		typeof(MaginotCardCoverShot),
 		typeof(MaginotCardECM),
+		typeof(MaginotCardForteress),
 		typeof(MaginotCardPavis),
+		typeof(MaginotCardSupplyChain),
 		typeof(MaginotCardTwinArtillery),
 	];
 	private static readonly List<Type> MaginotRareCardTypes = [
 		typeof (MaginotCardAllOrBurst),
+		typeof (MaginotCardArtilleryBank),
 		typeof (MaginotCardArtilleryBarrage),
 		typeof (MaginotCardNastySurprise),
 		typeof (MaginotCardScareTactics),
@@ -80,13 +80,8 @@ internal class ModEntry : SimpleMod
 	public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
 	{
 		Instance = this;
-		Harmony = new Harmony("Cornebre.Maginot");
-		
-		/*
-		 * Some mods provide an API, which can be requested from the ModRegistry.
-		 * The following is an example of a required dependency - the code would have unexpected errors if Kokoro was not present.
-		 * Dependencies can (and should) be defined within the nickel.json file, to ensure proper load mod load order.
-		 */
+		Harmony = new Harmony(package.Manifest.UniqueName);
+		Harmony.PatchAll();
 		KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!.V2;
 
 		AnyLocalizations = new JsonLocalizationProvider(
@@ -97,19 +92,10 @@ internal class ModEntry : SimpleMod
 			new CurrentLocaleOrEnglishLocalizationProvider<IReadOnlyList<string>>(AnyLocalizations)
 		);
 
-		/*
-		 * A deck only defines how cards should be grouped, for things such as codex sorting and Second Opinions.
-		 * A character must be defined with a deck to allow the cards to be obtainable as a character's cards.
-		 */
 		MaginotDeck = helper.Content.Decks.RegisterDeck("Maginot", new DeckConfiguration
 		{
 			Definition = new DeckDef
 			{
-				/*
-				 * This color is used in a few places:
-				 * TODO On cards, it dictates the sheen on higher rarities, as well as influences the color of the energy cost.
-				 * If this deck is given to a playable character, their name will be this color, and their mini will have this color as their border.
-				 */
 				color = new Color("d5c58a"),
 
 				titleColor = new Color("000000")
@@ -120,10 +106,6 @@ internal class ModEntry : SimpleMod
 			Name = AnyLocalizations.Bind(["character", "name"]).Localize
 		});
 
-		/*
-		 * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
-		 * This snippet invokes all of them, allowing them to register themselves with the package and helper.
-		 */
 		foreach (var type in AllRegisterableTypes)
 			AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 		
@@ -185,46 +167,61 @@ internal class ModEntry : SimpleMod
 			)
 		);
 
-		/*
-		 * Statuses are used to achieve many mechanics.
-		 * However, statuses themselves do not contain any code - they just keep track of how much you have.
-		 */
-		// KnowledgeStatus = helper.Content.Statuses.RegisterStatus("Knowledge", new StatusConfiguration
-		// {
-		// 	Definition = new StatusDef
-		// 	{
-		// 		isGood = true,
-		// 		affectedByTimestop = false,
-		// 		color = new Color("fbb954"),
-		// 		icon = RegisterSprite(package, "assets/knowledge.png").Sprite
-		// 	},
-		// 	Name = AnyLocalizations.Bind(["status", "knowledge", "name"]).Localize,
-		// 	Description = AnyLocalizations.Bind(["status", "knowledge", "desc"]).Localize
-		// });
-		// LessonStatus = helper.Content.Statuses.RegisterStatus("Lesson", new StatusConfiguration
-		// {
-		// 	Definition = new StatusDef
-		// 	{
-		// 		isGood = true,
-		// 		affectedByTimestop = false,
-		// 		color = new Color("c7dcd0"),
-		// 		icon = RegisterSprite(package, "assets/lesson.png").Sprite
-		// 	},
-		// 	Name = AnyLocalizations.Bind(["status", "lesson", "name"]).Localize,
-		// 	Description = AnyLocalizations.Bind(["status", "lesson", "desc"]).Localize
-		// });
-
-		/*
-		 * Managers are typically made to register themselves when constructed.
-		 * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.
-		 */
-		// _ = new KnowledgeManager(package, helper);
-		// _ = new SilentStatusManager();
+		MaginotManagerArtilleryBank = helper.Content.Statuses.RegisterStatus("MaginotManagerArtilleryBank", new StatusConfiguration
+		{
+			Definition = new StatusDef
+			{
+				isGood = true,
+				affectedByTimestop = false,
+				color = new Color("d5c58a"),
+				icon = RegisterSprite(package, "assets/Icons/artilleryBank.png").Sprite
+			},
+			Name = AnyLocalizations.Bind(["status", "artilleryBank", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "artilleryBank", "desc"]).Localize
+		});
+		MaginotManagerArmored = helper.Content.Statuses.RegisterStatus("MaginotManagerArmored", new StatusConfiguration
+		{
+			Definition = new StatusDef
+			{
+				isGood = true,
+				affectedByTimestop = false,
+				color = new Color("d5c58a"),
+				icon = RegisterSprite(package, "assets/Icons/armoredStatus.png").Sprite
+			},
+			Name = AnyLocalizations.Bind(["status", "armoredStatus", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "armoredStatus", "desc"]).Localize
+		});
+		MaginotManagerAutoShield = helper.Content.Statuses.RegisterStatus("MaginotManagerAutoShield", new StatusConfiguration
+		{
+			Definition = new StatusDef
+			{
+				isGood = true,
+				affectedByTimestop = false,
+				color = new Color("d5c58a"),
+				icon = RegisterSprite(package, "assets/Icons/autoShield.png").Sprite
+			},
+			Name = AnyLocalizations.Bind(["status", "autoShield", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "autoShield", "desc"]).Localize
+		});
+		MaginotManagerAutoTempShield = helper.Content.Statuses.RegisterStatus("MaginotManagerAutoTempShield+", new StatusConfiguration
+		{
+			Definition = new StatusDef
+			{
+				isGood = true,
+				affectedByTimestop = false,
+				color = new Color("d5c58a"),
+				icon = RegisterSprite(package, "assets/Icons/autoTempShield.png").Sprite
+			},
+			Name = AnyLocalizations.Bind(["status", "autoTempShield", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "autoTempShield", "desc"]).Localize
+		});
 
 		/*
 		 * Some classes require so little management that a manager may not be worth writing.
 		 */
 		MaginotActionNastySurprise.Spr = RegisterSprite(package, "assets/Icons/nastySurprise.png").Sprite;
+		MaginotActionArtilleryAttack.Spr = RegisterSprite(package, "assets/Icons/artilleryAttack.png").Sprite;
+		MaginotActionMaxShieldHint.Spr = RegisterSprite(package, "assets/Icons/totalShield.png").Sprite;
 	}
 
 	/*

@@ -9,7 +9,6 @@ public class MaginotActionNastySurprise : CardAction
 	public static Spr Spr;
 	
 	public int Count;
-	public CardDestination Destination;
 
 	public override void Begin(G g, State s, Combat c)
 	{
@@ -40,23 +39,15 @@ public class MaginotActionNastySurprise : CardAction
 
 	public override List<Tooltip> GetTooltips(State s)
 	{
-		var side = Destination == CardDestination.Discard ? "Discard" : "Draw";
 		return
 		[
-			new GlossaryTooltip($"MaginotActioNastySurprise::{side}")
+			new GlossaryTooltip($"MaginotActioNastySurprise")
 			{
 				Icon = Spr,
 				Title = ModEntry.Instance.Localizations.Localize(["action", "NastySurprise", "title"]),
 				TitleColor = Colors.card,
-                Description = ModEntry.Instance.Localizations.Localize(["action", "NastySurprise", "description"])
+				Description = ModEntry.Instance.Localizations.Localize(["action", "NastySurprise", "description"])
 			},
 		];
 	}
-
-	// private static Upgrade GetNextUpgrade(State s)
-	// {
-	// 	if (s.EnumerateAllArtifacts().Find(a => a is Lexicon) is not Lexicon lexicon)
-	// 		return Upgrade.None;
-	// 	return lexicon.PullAndFlip();
-	// }
 }

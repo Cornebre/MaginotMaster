@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Cornebre.Maginot.Actions;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -27,18 +28,18 @@ internal sealed class MaginotCardTwinArtillery : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 3
+			cost = upgrade == Upgrade.B ? 4 : 3
 		};
 	}
 
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
 		return [
-			new AAttack
+			new MaginotActionArtilleryAttack
 			{
 				damage = GetDmg(s, upgrade == Upgrade.A ? 4 : upgrade == Upgrade.B ? 5 : 3 )
 			},
-			new AAttack
+			new MaginotActionArtilleryAttack
 			{
 				damage = GetDmg(s, upgrade == Upgrade.A ? 4 : upgrade == Upgrade.B ? 5 : 3 )
 			}

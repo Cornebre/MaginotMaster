@@ -48,23 +48,4 @@ internal sealed class MaginotCardNastySurprise : Card, IRegisterable
 			}
 		];
 	}
-	
-	private int GetTempShieldAmt(State s)
-	{
-		int result = 0;
-		if (s.route is Combat)
-		{
-			result = s.ship.Get(Status.tempShield);
-		}
-		return result;
-	}
-	private int GetEvadeAmt(State s)
-	{
-		int result = 0;
-		if (s.route is Combat)
-		{
-			result = s.ship.Get(Status.evade);
-		}
-		return result;
-	}
 }

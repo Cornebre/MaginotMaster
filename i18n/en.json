@@ -1,107 +1,127 @@
 ﻿{
-    "character": {
-        "name": "Maginot",
-        "desc": "<c=d5c58a>MAGINOT</c>\nYour military advisor. His cards bring a lot of shield and midrow objects, with a dash of midrow ignoring weapons."
-    },
-    "status": {
-        "knowledge": {
-            "name": "Knowledge",
-            "desc": "Base limit of 3. When reaching the limit, spend the required <c=status>KNOWLEDGE</c> to gain 1 <c=status>POWERDRIVE</c> and 1 <c=status>LESSON</c>. Excess <c=status>KNOWLEDGE</c> is not lost."
-        },
-        "lesson": {
-            "name": "Lesson",
-            "desc": "Increase the limit of <c=status>KNOWLEDGE</c> by {0}."
-        }
-    },
-    "action": {
-        "NastySurprise": {
-            "title": "Nasty Surprise",
-            "description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>mines</c>."
-        }
-    },
-    "card": {
-        "FrontLine": {
-            "name": "Front Line"
-        },
-        "HeavyCaltrops": {
-            "name": "Heavy Caltrops"
-        },
-        "BuildUp": {
-            "name": "Build Up"
-        },
-        "Brace": {
-            "name": "Brace"
-        },
-        "BunkerDown": {
-            "name": "Bunker Down"
-        },
-        "HoldTheLine": {
-            "name": "Hold The Line"
-        },
-        "PowerToShields": {
-            "name": "Power To Shields"
-        },
-        "ArtilleryShot": {
-            "name": "Artillery Shot"
-        },
-        "ArtilleryShell": {
-            "name": "Artillery Shell"
-        },
-        "MobileFort": {
-            "name": "Mobile Fort"
-        },
-        "CoverShot": {
-            "name": "Cover Shot"
-        },
-        "TwinArtillery": {
-            "name": "Twin Artillery"
-        },
-        "AllOrBurst": {
-            "name": "All Or Burst"
-        },
-        "ScareTactics": {
-            "name": "Scare Tactics"
-        },
-        "ArtilleryBarrage": {
-            "name": "Artillery Barrage",
-            "description": {
-                "None": "Add three <c=card>Artillery Shell A</c> to your hand.",
-                "A": "Add four <c=card>Artillery Shell A</c> to your hand.",
-                "B": "Add three <c=card>Artillery Shell A</c> to your hand and two to your draw."
-            }
-        },
-        "NastySurprise": {
-            "name": "Nasty Surprise",
-            "description": {
-                "None": "Add three <c=card>Artillery Shell A</c> to your hand.",
-                "A": "Add four <c=card>Artillery Shell A</c> to your hand.",
-                "B": "Add three <c=card>Artillery Shell A</c> to your hand and two to your draw."
-            }
-        },
-        "ECM": {
-            "name": "E.C.M."
-        },
-        "HammerThrough": {
-            "name": "Hammer Through",
-            "description": {
-                "None": "Artillery <c=keyword>{0}</c>. +1 for every time played this combat.",
-                "A": "Draw 1.\nArtillery <c=keyword>{0}</c>. +1 for every time played this combat.",
-                "B": "Artillery <c=keyword>{0}</c>. +2 for every time played this combat."
-            }
-        },
-        "Pavis": {
-            "name": "Pavis",
-            "description": "Temporary Shield = total dmg of enemy's cannon attack: {0}."
-        }
-    },
-    "artifact": {
-        "BuriedKnowledge": {
-            "name": "BURIED KNOWLEDGE",
-            "desc": "At the start of combat, add 3 <c=card>Ponder</c>s to the discard pile."
-        },
-        "Lexicon": {
-            "name": "LEXICON",
-            "desc": "Whenever you gain a <c=card>Ponder</c> during combat, it is given the A or B upgrade, alternating."
-        }
-    }
+	"character": {
+		"name": "Maginot",
+		"desc": "<c=d5c58a>MAGINOT</c>\nYour military advisor. His cards bring a lot of shield and midrow objects, with a dash of midrow ignoring weapons."
+	},
+	"status": {
+		"artilleryBank": {
+			"name": "Artillery Bank",
+			"desc": "After drawing cards at the start of each turn, draw <c=keyword>{0}</c> <c=card>Artillery Shell</c>."
+		},
+		"autoShield": {
+			"name": "Auto Shield",
+			"desc": "At the start of this ship's turn, gains <c=keyword>{0}</c> <c=status>SHIELD</c>."
+		},
+		"autoTempShield": {
+			"name": "Auto Temp.Shield",
+			"desc": "At the start of this ship's turn, gains <c=keyword>{0}</c> <c=status>TEMP SHIELD</c>."
+		},
+		"armoredStatus": {
+			"name": "Armored",
+			"desc": "Give <c=parttrait>armor</c> to all this ship's parts. <c=downside>Decreases by 1 at end of turn.</c>"
+		}
+	},
+	"action": {
+		"NastySurprise": {
+			"title": "Nasty Surprise",
+			"description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>mines</c>."
+		},
+		"ArtilleryAttack": {
+			"title": "Artillery Attack",
+			"description": "Attack that bypass <c=midrow>midrow objects</c> on its path. Bypassed <c=midrow>midrow objects</c> can't react to this attack."
+		},
+		"MaxShieldHint": {
+			"description.hand": "X = your <c=status>TOTAL SHIELD CAPACITY</c> (<c=keyword>{0}</c>).",
+			"description.deck": "X = your <c=status>TOTAL SHIELD CAPACITY</c>."
+		}
+	},
+	"card": {
+		"FrontLine": {
+			"name": "Front Line"
+		},
+		"HeavyCaltrops": {
+			"name": "Heavy Caltrops"
+		},
+		"BuildUp": {
+			"name": "Build Up"
+		},
+		"Brace": {
+			"name": "Brace"
+		},
+		"BunkerDown": {
+			"name": "Bunker Down"
+		},
+		"HoldTheLine": {
+			"name": "Hold The Line"
+		},
+		"PowerToShields": {
+			"name": "Power To Shields"
+		},
+		"ArtilleryShot": {
+			"name": "Artillery Shot"
+		},
+		"ArtilleryShell": {
+			"name": "Artillery Shell"
+		},
+		"MobileFort": {
+			"name": "Mobile Fort"
+		},
+		"CoverShot": {
+			"name": "Cover Shot"
+		},
+		"TwinArtillery": {
+			"name": "Twin Artillery"
+		},
+		"AllOrBurst": {
+			"name": "All Or Burst"
+		},
+		"ScareTactics": {
+			"name": "Scare Tactics"
+		},
+		"ArtilleryBarrage": {
+			"name": "Artillery Barrage",
+			"description": {
+				"None": "Add three <c=card>Artillery Shell A</c> to your <c=keyword>hand</c>.",
+				"A": "Add four <c=card>Artillery Shell A</c> to your <c=keyword>hand</c>.",
+				"B": "Add three <c=card>Artillery Shell A</c> to your <c=keyword>hand</c> and two to the <c=keyword>draw pile</c>."
+			}
+		},
+		"NastySurprise": {
+			"name": "Nasty Surprise"
+		},
+		"ECM": {
+			"name": "E.C.M."
+		},
+		"SupplyChain": {
+			"name": "Supply Chain"
+		},
+		"ArtilleryBank": {
+			"name": "Artillery Bank"
+		},
+		"Forteress": {
+			"name": "Forteress"
+		},
+		"HammerThrough": {
+			"name": "Hammer Through",
+			"description": {
+				"None": "Artillery <c=keyword>{0}</c>. +1 for every time played this combat.",
+				"A": "Draw 1.\nArtillery <c=keyword>{0}</c>. +1 for every time played this combat.",
+				"B": "Artillery <c=keyword>{0}</c>. +2 for every time played this combat."
+			}
+		},
+		"Pavis": {
+			"name": "Pavis",
+			"description": "Temporary Shield = total dmg of enemy's cannon attack: <c=keyword>{0}</c>."
+		}
+	},
+	"artifact": {
+		"BuriedKnowledge": {
+			"name": "BURIED KNOWLEDGE",
+			"desc": "At the start of combat, add 3 <c=card>Ponder</c>s to the discard pile."
+		},
+		"Lexicon": {
+			"name": "LEXICON",
+			"desc": "Whenever you gain a <c=card>Ponder</c> during combat, it is given the A or B upgrade, alternating."
+		}
+	}
 }

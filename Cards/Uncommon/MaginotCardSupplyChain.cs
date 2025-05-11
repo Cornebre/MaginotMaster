@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
-using Cornebre.Maginot.Actions;
 using Nanoray.PluginManager;
 using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardScareTactics : Card, IRegisterable
+internal sealed class MaginotCardSupplyChain : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -16,10 +15,10 @@ internal sealed class MaginotCardScareTactics : Card, IRegisterable
 			Meta = new CardMeta
 			{
 				deck = ModEntry.Instance.MaginotDeck.Deck,
-				rarity = Rarity.rare,
+				rarity = Rarity.uncommon,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ScareTactics", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "SupplyChain", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -28,25 +27,31 @@ internal sealed class MaginotCardScareTactics : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 2,
-			exhaust = true,
-			retain = upgrade == Upgrade.A
+			cost = 3,
+			exhaust = true
 		};
 	}
 
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
-		return [
-			new AStatus
-			{
-				status = Status.autododgeLeft,
-				statusAmount = 1,
-				targetPlayer = false
-			},
-			new MaginotActionArtilleryAttack
-			{
-				damage = GetDmg(s, upgrade == Upgrade.B ? 16 : 8)
-			}
-		];
+		return upgrade switch
+		{
+			Upgrade.B => [
+				new AStatus
+				{
+					status = ModEntry.Instance.MaginotManagerAutoShield.Status,
+					statusAmount = 2,
+					targetPlayer = true
+				}
+			],
+			_ => [
+				new AStatus
+				{
+					status = ModEntry.Instance.MaginotManagerAutoTempShield.Status,
+					statusAmount = upgrade == Upgrade.A ? 3 : 2,
+					targetPlayer = true
+				}
+			]
+		};
 	}
 }

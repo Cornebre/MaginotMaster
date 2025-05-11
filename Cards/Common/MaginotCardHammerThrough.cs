@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Cornebre.Maginot.Actions;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -42,19 +43,19 @@ internal sealed class MaginotCardHammerThrough : Card, IRegisterable
 				{
 					count = 1
 				},
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, value)
 				}
 			],
 			Upgrade.B => [
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, value)
 				}
 			],
 			_ => [
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, value)
 				}

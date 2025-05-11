@@ -36,25 +36,6 @@ internal sealed class MaginotCardHeavyCaltrops : Card, IRegisterable
 	{
 		return upgrade switch
 		{
-			Upgrade.A => [
-				new ASpawn
-				{
-					thing = new SpaceMine
-					{
-						yAnimation = 0.0,
-						bigMine = true
-					},
-					offset = -1
-				},
-				new ASpawn
-				{
-					thing = new SpaceMine
-					{
-						yAnimation = 0.0,
-						bigMine = true
-					},
-				}
-			],
 			Upgrade.B => [
 				new ASpawn
 				{
@@ -62,7 +43,7 @@ internal sealed class MaginotCardHeavyCaltrops : Card, IRegisterable
 					{
 						yAnimation = 0.0
 					},
-					offset = -1
+					offset = 1
 				},
 				new ASpawn
 				{
@@ -83,15 +64,17 @@ internal sealed class MaginotCardHeavyCaltrops : Card, IRegisterable
 				{
 					thing = new SpaceMine
 					{
-						yAnimation = 0.0
+						yAnimation = 0.0,
+						bigMine = upgrade == Upgrade.A
 					},
-					offset = -1
+					offset = 1
 				},
 				new ASpawn
 				{
 					thing = new SpaceMine
 					{
-						yAnimation = 0.0
+						yAnimation = 0.0,
+						bigMine = upgrade == Upgrade.A
 					},
 				}
 			]

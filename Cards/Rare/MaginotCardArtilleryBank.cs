@@ -6,7 +6,7 @@ using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardBuildUp : Card, IRegisterable
+internal sealed class MaginotCardArtilleryBank : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -16,10 +16,10 @@ internal sealed class MaginotCardBuildUp : Card, IRegisterable
 			Meta = new CardMeta
 			{
 				deck = ModEntry.Instance.MaginotDeck.Deck,
-				rarity = Rarity.common,
+				rarity = Rarity.rare,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "BuildUp", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryBank", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -28,8 +28,8 @@ internal sealed class MaginotCardBuildUp : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 2,
-			exhaust = upgrade == Upgrade.B
+			cost = 3,
+			exhaust = upgrade != Upgrade.A
 		};
 	}
 
@@ -37,58 +37,24 @@ internal sealed class MaginotCardBuildUp : Card, IRegisterable
 	{
 		return upgrade switch
 		{
-			Upgrade.A => [
-				new AStatus
-				{
-					status = Status.maxShield,
-					statusAmount = 1,
-					targetPlayer = true
-				},
-				new AStatus
-				{
-					status = Status.shield,
-					statusAmount = 2,
-					targetPlayer = true
-				},
-				new MaginotActionArtilleryAttack
-				{
-					damage = GetDmg(s, 2)
-				}
-			],
 			Upgrade.B => [
 				new AStatus
 				{
-					status = Status.maxShield,
-					statusAmount = 2,
-					targetPlayer = true
-				},
-				new AStatus
-				{
-					status = Status.shield,
-					statusAmount = 3,
+					status = ModEntry.Instance.MaginotManagerArtilleryBank.Status,
+					statusAmount = 1,
 					targetPlayer = true
 				},
 				new MaginotActionArtilleryAttack
 				{
-					damage = GetDmg(s, 2)
+					damage = GetDmg(s, 2 )
 				}
 			],
 			_ => [
 				new AStatus
 				{
-					status = Status.maxShield,
+					status = ModEntry.Instance.MaginotManagerArtilleryBank.Status,
 					statusAmount = 1,
 					targetPlayer = true
-				},
-				new AStatus
-				{
-					status = Status.shield,
-					statusAmount = 1,
-					targetPlayer = true
-				},
-				new MaginotActionArtilleryAttack
-				{
-					damage = GetDmg(s, 1)
 				}
 			]
 		};

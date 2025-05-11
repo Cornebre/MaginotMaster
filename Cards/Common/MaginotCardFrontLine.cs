@@ -44,7 +44,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 						yAnimation = 0.0,
 						bubbleShield = true
 					},
-					offset = -1
+					offset = 1
 				},
 				new ASpawn
 				{
@@ -62,7 +62,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 					{
 						yAnimation = 0.0
 					},
-					offset = -3
+					offset = 3
 				},
 				new ASpawn
 				{
@@ -70,7 +70,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 					{
 						yAnimation = 0.0
 					},
-					offset = -2
+					offset = 2
 				},
 				new ASpawn
 				{
@@ -78,7 +78,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 					{
 						yAnimation = 0.0
 					},
-					offset = -1
+					offset = 1
 				},
 				new ASpawn
 				{
@@ -95,7 +95,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 					{
 						yAnimation = 0.0
 					},
-					offset = -1
+					offset = 1
 				},
 				new ASpawn
 				{

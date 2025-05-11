@@ -54,7 +54,8 @@ internal sealed class MaginotCardArtilleryBarrage : Card, IRegisterable
 						upgrade = Upgrade.A
 					},
 					amount = 2,
-					destination = CardDestination.Deck
+					destination = CardDestination.Deck,
+					omitFromTooltips = true
 				}
 			],
 			_ => [
@@ -69,24 +70,5 @@ internal sealed class MaginotCardArtilleryBarrage : Card, IRegisterable
 				},
 			]
 		};
-	}
-	
-	private int GetTempShieldAmt(State s)
-	{
-		int result = 0;
-		if (s.route is Combat)
-		{
-			result = s.ship.Get(Status.tempShield);
-		}
-		return result;
-	}
-	private int GetEvadeAmt(State s)
-	{
-		int result = 0;
-		if (s.route is Combat)
-		{
-			result = s.ship.Get(Status.evade);
-		}
-		return result;
 	}
 }

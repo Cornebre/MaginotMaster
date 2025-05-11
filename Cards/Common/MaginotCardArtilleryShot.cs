@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Cornebre.Maginot.Actions;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -35,7 +36,7 @@ internal sealed class MaginotCardArtilleryShot : Card, IRegisterable
 	public override List<CardAction> GetActions(State s, Combat c)
 	{
 		return [
-			new AAttack
+			new MaginotActionArtilleryAttack
 			{
 				damage = GetDmg(s, upgrade == Upgrade.A ? 5 : upgrade == Upgrade.B ? 7 : 3)
 			}

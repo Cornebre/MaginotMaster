@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Cornebre.Maginot.Actions;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -37,7 +38,7 @@ internal sealed class MaginotCardCoverShot : Card, IRegisterable
 		return upgrade switch
 		{
 			Upgrade.B => [
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, 3),
 				},
@@ -51,7 +52,7 @@ internal sealed class MaginotCardCoverShot : Card, IRegisterable
 				}
 			],
 			_ => [
-				new AAttack
+				new MaginotActionArtilleryAttack
 				{
 					damage = GetDmg(s, upgrade == Upgrade.A ? 5 : 3),
 				},
