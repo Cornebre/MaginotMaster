@@ -184,7 +184,7 @@ internal class ModEntry : SimpleMod
 			Definition = new StatusDef
 			{
 				isGood = true,
-				affectedByTimestop = false,
+				affectedByTimestop = true,
 				color = new Color("d5c58a"),
 				icon = RegisterSprite(package, "assets/Icons/armoredStatus.png").Sprite
 			},
@@ -215,6 +215,11 @@ internal class ModEntry : SimpleMod
 			Name = AnyLocalizations.Bind(["status", "autoTempShield", "name"]).Localize,
 			Description = AnyLocalizations.Bind(["status", "autoTempShield", "desc"]).Localize
 		});
+		
+		_ = new MaginotManagerArtilleryBank(package, helper);
+		// _ = new MaginotManagerArmored(package, helper);
+		// _ = new MaginotManagerAutoShield(package, helper);
+		// _ = new MaginotManagerAutoTempShield(package, helper);
 
 		/*
 		 * Some classes require so little management that a manager may not be worth writing.

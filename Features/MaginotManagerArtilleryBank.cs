@@ -15,26 +15,27 @@ public class MaginotManagerArtilleryBank : IKokoroApi.IV2.IStatusRenderingApi.IH
 	{
 		ModEntry.Instance.KokoroApi.StatusRendering.RegisterHook(this);
 		ModEntry.Instance.Harmony.Patch(
-			original: AccessTools.DeclaredMethod(typeof(AStatus), nameof(AStatus.Begin)),
-			postfix: new HarmonyMethod(GetType(), nameof(AStatus_Begin_Postfix))
+			original: AccessTools.DeclaredMethod(typeof(AStatus), nameof(AStatus.Begin))
+			//postfix: new HarmonyMethod(GetType(), nameof(AStatus_Begin_Postfix))
 		);
 	}
 	
-	public static void AStatus_Begin_Postfix(AStatus __instance, State s, Combat c)
+	public bool HandleStatusTurnAutoStep(IKokoroApi.IV2.IStatusLogicApi.IHook.IHandleStatusTurnAutoStepArgs args)
 	{
-		if (__instance.status != ModEntry.Instance.MaginotManagerArtilleryBank.Status) return;
-		
-		var ship = __instance.targetPlayer ? s.ship : c.otherShip;
-		int maginotArtillery = ship.Get(ModEntry.Instance.MaginotManagerArtilleryBank.Status);
-		
-		c.QueueImmediate([
-			new AAddCard
-			{
+		if (args.Status != ModEntry.Instance.MaginotManagerArtilleryBank.Status)
+			return false;
+		if (args.Timing != IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnStart)
+			return false;
+
+		if (args.Amount > 0) {
+			args.Combat.Queue(new AAddCard {
 				card = new MAginotCardArtilleryShell(),
-				amount = maginotArtillery,
-				destination = CardDestination.Hand
-			}
-		]);
+				amount = args.Amount,
+				destination = CardDestination.Hand,
+				statusPulse = ModEntry.Instance.MaginotManagerArtilleryBank.Status
+			});
+		}
+		return false;
 	}
 	
 	public IReadOnlyList<Tooltip> OverrideStatusTooltips(IKokoroApi.IV2.IStatusRenderingApi.IHook.IOverrideStatusTooltipsArgs args) {
