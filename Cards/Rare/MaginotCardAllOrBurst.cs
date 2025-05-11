@@ -40,43 +40,18 @@ internal sealed class MaginotCardAllOrBurst : Card, IRegisterable
 			Upgrade.A => [
 				new AStatus
 				{
-					status = Status.maxShield,
+					status = Status.shield,
 					statusAmount = 1,
 					targetPlayer = true
 				},
-				new MaginotActionMaxShieldHint
+				new AVariableHint
 				{
-					status = Status.maxShield
+					status = Status.shield
 				},
 				new MaginotActionArtilleryAttack
 				{
-					damage = GetDmg(s, GetMaxShieldAmt(s) * 2),
+					damage = GetDmg(s, GetValueAmt(s) * 2),
 					xHint = 2
-				},
-				new AStatus
-				{
-					status = Status.maxShield,
-					statusAmount = - s.ship.GetMaxShield(),
-					xHint = -1,
-					targetPlayer = true
-				}
-			],
-			Upgrade.B => [
-				new MaginotActionMaxShieldHint
-				{
-					status = Status.maxShield
-				},
-				new MaginotActionArtilleryAttack
-				{
-					damage = GetDmg(s, GetMaxShieldAmt(s) * 2),
-					xHint = 2
-				},
-				new AStatus
-				{
-					status = Status.maxShield,
-					statusAmount = 0,
-					mode = AStatusMode.Set,
-					targetPlayer = true
 				},
 				new AStatus
 				{
@@ -86,34 +61,72 @@ internal sealed class MaginotCardAllOrBurst : Card, IRegisterable
 					targetPlayer = true
 				}
 			],
-			_ => [
-				new MaginotActionMaxShieldHint
+			Upgrade.B => [
+				new AVariableHint
 				{
-					status = Status.maxShield
+					status = Status.shield,
+					secondStatus = Status.evade
 				},
 				new MaginotActionArtilleryAttack
 				{
-					damage = GetDmg(s, GetMaxShieldAmt(s) * 2),
+					damage = GetDmg(s, GetValueAmt(s) * 2),
 					xHint = 2
 				},
 				new AStatus
 				{
-					status = Status.maxShield,
-					statusAmount = - s.ship.GetMaxShield(),
-					xHint = -1,
+					status = Status.shield,
+					statusAmount = 0,
+					mode = AStatusMode.Set,
+					targetPlayer = true
+				},
+				new AStatus
+				{
+					status = Status.evade,
+					statusAmount = 0,
+					mode = AStatusMode.Set,
+					targetPlayer = true
+				}
+			],
+			_ => [
+				new AVariableHint
+				{
+					status = Status.shield
+				},
+				new MaginotActionArtilleryAttack
+				{
+					damage = GetDmg(s, GetValueAmt(s) * 2),
+					xHint = 2
+				},
+				new AStatus
+				{
+					status = Status.shield,
+					statusAmount = 0,
+					mode = AStatusMode.Set,
 					targetPlayer = true
 				}
 			]
 		};
 	}
 	
-	private int GetMaxShieldAmt(State s)
+	private int GetValueAmt(State s)
 	{
-		int result = 0;
+		int num = 0;
 		if (s.route is Combat)
 		{
-			result = s.ship.GetMaxShield();
+			num = s.ship.Get(Status.shield);
+			if (upgrade == Upgrade.B)
+			{
+				num += s.ship.Get(Status.tempShield);
+			}
+			if (upgrade == Upgrade.A)
+			{
+				num++;
+				if (num > s.ship.GetMaxShield())
+				{
+					num = s.ship.GetMaxShield();
+				}
+			}
 		}
-		return result;
+		return num;
 	}
 }
