@@ -24,7 +24,7 @@
 	"action": {
 		"NastySurprise": {
 			"title": "Nasty Surprise",
-			"description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>mines</c>."
+			"description": "Instantly turn every <c=midrow>objects in the midrow</c> into <c=drone>mines</c>."
 		},
 		"ArtilleryAttack": {
 			"title": "Artillery Attack",
@@ -115,13 +115,25 @@
 		}
 	},
 	"artifact": {
-		"BuriedKnowledge": {
-			"name": "BURIED KNOWLEDGE",
-			"desc": "At the start of combat, add 3 <c=card>Ponder</c>s to the discard pile."
+		"MilitaryDiscount": {
+			"name": "MILITARY DISCOUNT",
+			"desc": "Gain 1 <c=energy>ENERGY</c> the first time per turn you spend 2+ energy playing a <c=d5c58a>MAGINOT</c> card."
 		},
-		"Lexicon": {
-			"name": "LEXICON",
-			"desc": "Whenever you gain a <c=card>Ponder</c> during combat, it is given the A or B upgrade, alternating."
+		"TrenchWarfare": {
+			"name": "TRENCH WARFARE",
+			"desc": "At the start of combat, fill the <c=midrow>midrow</c> with <c=drone>Asteroids</c>."
+		},
+		"ActiveShielding": {
+			"name": "ACTIVE SHIELDING",
+			"desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>Active Shielding</c>."
+		},
+		"AutoCannon": {
+			"name": "AUTO CANNON",
+			"desc": "Every 6 gain of <c=status>SHIELD</c>, gain an <c=card>Artillery Shell</c>."
+		},
+		"SafetyFuse": {
+			"name": "SAFETY FUSE",
+			"desc": "Reduce <c=drone>mines</c> damage to 0 when you destroy them."
 		}
 	}
 }

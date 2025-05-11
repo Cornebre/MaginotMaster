@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Cornebre.Maginot.Actions;
-//using Cornebre.Maginot.Artifacts;
+using Cornebre.Maginot.Artifacts;
 using Cornebre.Maginot.Cards;
 using Cornebre.Maginot.External;
 using Cornebre.Maginot.Features;
@@ -66,8 +66,13 @@ internal class ModEntry : SimpleMod
 			.Concat(MaginotSpecialCardTypes);
 
 	private static readonly List<Type> MaginotCommonArtifacts = [
+		typeof(MaginotArtifactActiveShielding),
+		typeof(MaginotArtifactSafetyFuse),
+		typeof(MaginotArtifactAutoCannon),
 	];
 	private static readonly List<Type> MaginotBossArtifacts = [
+		typeof(MaginotArtifactMilitaryDiscount),
+		typeof(MaginotArtifactTrenchWarfare),
 	];
 	private static readonly IEnumerable<Type> MaginotArtifactTypes =
 		MaginotCommonArtifacts
@@ -186,7 +191,7 @@ internal class ModEntry : SimpleMod
 				isGood = true,
 				affectedByTimestop = true,
 				color = new Color("d5c58a"),
-				icon = RegisterSprite(package, "assets/Icons/armoredStatus.png").Sprite
+				icon = RegisterSprite(package, "assets/Icons/activeShielding.png").Sprite
 			},
 			Name = AnyLocalizations.Bind(["status", "activeShielding", "name"]).Localize,
 			Description = AnyLocalizations.Bind(["status", "activeShielding", "desc"]).Localize
