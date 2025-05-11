@@ -16,9 +16,9 @@
 			"name": "Auto Temp.Shield",
 			"desc": "At the start of this ship's turn, gains <c=keyword>{0}</c> <c=status>TEMP SHIELD</c>."
 		},
-		"armoredStatus": {
-			"name": "Armored",
-			"desc": "Give <c=parttrait>armor</c> to all this ship's parts. <c=downside>Decreases by 1 at end of turn.</c>"
+		"activeShielding": {
+			"name": "Active Shielding",
+			"desc": "Gains 1 <c=status>SHIELD</c> each time this ship is about to be hit. <c=downside>Decreases by 1 at end of turn.</c>"
 		}
 	},
 	"action": {
@@ -98,8 +98,8 @@
 		"ArtilleryBank": {
 			"name": "Artillery Bank"
 		},
-		"Forteress": {
-			"name": "Forteress"
+		"ActiveShielding": {
+			"name": "Active Shielding"
 		},
 		"HammerThrough": {
 			"name": "Hammer Through",

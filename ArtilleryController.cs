@@ -1,4 +1,3 @@
-using System;
 using HarmonyLib;
 
 namespace Cornebre.Maginot;

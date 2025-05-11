@@ -7,16 +7,15 @@ using Nickel;
 
 namespace Cornebre.Maginot.Features;
 
-
-public class MaginotManagerArtilleryBank : IKokoroApi.IV2.IStatusRenderingApi.IHook
+public class MaginotManagerArtilleryBank : IKokoroApi.IV2.IStatusRenderingApi.IHook, IKokoroApi.IV2.IStatusLogicApi.IHook
 {
 	
 	public MaginotManagerArtilleryBank(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
 		ModEntry.Instance.KokoroApi.StatusRendering.RegisterHook(this);
+		ModEntry.Instance.KokoroApi.StatusLogic.RegisterHook(this);
 		ModEntry.Instance.Harmony.Patch(
 			original: AccessTools.DeclaredMethod(typeof(AStatus), nameof(AStatus.Begin))
-			//postfix: new HarmonyMethod(GetType(), nameof(AStatus_Begin_Postfix))
 		);
 	}
 	

@@ -5,7 +5,7 @@ using Nickel;
 
 namespace Cornebre.Maginot.Cards;
 
-internal sealed class MaginotCardForteress : Card, IRegisterable
+internal sealed class MaginotCardActiveShielding : Card, IRegisterable
 {
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
@@ -18,7 +18,7 @@ internal sealed class MaginotCardForteress : Card, IRegisterable
 				rarity = Rarity.uncommon,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Forteress", "name"]).Localize
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ActiveShielding", "name"]).Localize
 			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
 		});
 	}
@@ -37,7 +37,7 @@ internal sealed class MaginotCardForteress : Card, IRegisterable
 		return [
 			new AStatus
 			{
-				status = ModEntry.Instance.MaginotManagerArmored.Status,
+				status = ModEntry.Instance.MaginotManagerActiveShielding.Status,
 				statusAmount = upgrade == Upgrade.B ? 1 : 2,
 				targetPlayer = true
 			}

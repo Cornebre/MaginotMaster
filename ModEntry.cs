@@ -22,7 +22,7 @@ internal class ModEntry : SimpleMod
 	internal IKokoroApi.IV2 KokoroApi;
 	internal IDeckEntry MaginotDeck;
 	internal IStatusEntry MaginotManagerArtilleryBank;
-	internal IStatusEntry MaginotManagerArmored;
+	internal IStatusEntry MaginotManagerActiveShielding;
 	internal IStatusEntry MaginotManagerAutoShield;
 	internal IStatusEntry MaginotManagerAutoTempShield;
 	internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
@@ -44,7 +44,7 @@ internal class ModEntry : SimpleMod
 		typeof(MaginotCardBunkerDown),
 		typeof(MaginotCardCoverShot),
 		typeof(MaginotCardECM),
-		typeof(MaginotCardForteress),
+		typeof(MaginotCardActiveShielding),
 		typeof(MaginotCardPavis),
 		typeof(MaginotCardSupplyChain),
 		typeof(MaginotCardTwinArtillery),
@@ -179,7 +179,7 @@ internal class ModEntry : SimpleMod
 			Name = AnyLocalizations.Bind(["status", "artilleryBank", "name"]).Localize,
 			Description = AnyLocalizations.Bind(["status", "artilleryBank", "desc"]).Localize
 		});
-		MaginotManagerArmored = helper.Content.Statuses.RegisterStatus("MaginotManagerArmored", new StatusConfiguration
+		MaginotManagerActiveShielding = helper.Content.Statuses.RegisterStatus("MaginotManagerActiveShielding", new StatusConfiguration
 		{
 			Definition = new StatusDef
 			{
@@ -188,8 +188,8 @@ internal class ModEntry : SimpleMod
 				color = new Color("d5c58a"),
 				icon = RegisterSprite(package, "assets/Icons/armoredStatus.png").Sprite
 			},
-			Name = AnyLocalizations.Bind(["status", "armoredStatus", "name"]).Localize,
-			Description = AnyLocalizations.Bind(["status", "armoredStatus", "desc"]).Localize
+			Name = AnyLocalizations.Bind(["status", "activeShielding", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["status", "activeShielding", "desc"]).Localize
 		});
 		MaginotManagerAutoShield = helper.Content.Statuses.RegisterStatus("MaginotManagerAutoShield", new StatusConfiguration
 		{
@@ -217,9 +217,9 @@ internal class ModEntry : SimpleMod
 		});
 		
 		_ = new MaginotManagerArtilleryBank(package, helper);
-		// _ = new MaginotManagerArmored(package, helper);
-		// _ = new MaginotManagerAutoShield(package, helper);
-		// _ = new MaginotManagerAutoTempShield(package, helper);
+		_ = new MaginotManagerActiveShielding(package, helper);
+		_ = new MaginotManagerAutoShield(package, helper);
+		_ = new MaginotManagerAutoTempShield(package, helper);
 
 		/*
 		 * Some classes require so little management that a manager may not be worth writing.
