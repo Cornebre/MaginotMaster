@@ -14,16 +14,19 @@ public class MaginotActionNastySurprise : CardAction
 	{
 		foreach (StuffBase item in c.stuff.Values.ToList())
 		{
-			c.stuff.Remove(item.x);
-			SpaceMine value = new SpaceMine
+			if (item is not SpaceMine)
 			{
-				x = item.x,
-				xLerped = item.xLerped,
-				bubbleShield = item.bubbleShield,
-				targetPlayer = item.targetPlayer,
-				age = item.age
-			};
-			c.stuff[item.x] = value;
+				c.stuff.Remove(item.x);
+				SpaceMine value = new SpaceMine
+				{
+					x = item.x,
+					xLerped = item.xLerped,
+					bubbleShield = item.bubbleShield,
+					targetPlayer = item.targetPlayer,
+					age = item.age
+				};
+				c.stuff[item.x] = value;
+			}
 		}
 	}
 

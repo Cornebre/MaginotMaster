@@ -13,7 +13,7 @@ public class MaginotArtifactActiveShielding : Artifact, IRegisterable
 			ArtifactType = MethodBase.GetCurrentMethod()!.DeclaringType!,
 			Meta = new ArtifactMeta
 			{
-				pools = [ArtifactPool.Common],
+				pools = [ArtifactPool.Boss],
 				owner = ModEntry.Instance.MaginotDeck.Deck
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["artifact", "ActiveShielding", "name"]).Localize,

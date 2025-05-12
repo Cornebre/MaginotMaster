@@ -66,11 +66,13 @@ internal class ModEntry : SimpleMod
 			.Concat(MaginotSpecialCardTypes);
 
 	private static readonly List<Type> MaginotCommonArtifacts = [
-		typeof(MaginotArtifactActiveShielding),
 		typeof(MaginotArtifactSafetyFuse),
 		typeof(MaginotArtifactAutoCannon),
+		typeof(MaginotArtifactMomentumCollector),
+		typeof(MaginotArtifactMedalOfHonor),
 	];
 	private static readonly List<Type> MaginotBossArtifacts = [
+		typeof(MaginotArtifactActiveShielding),
 		typeof(MaginotArtifactMilitaryDiscount),
 		typeof(MaginotArtifactTrenchWarfare),
 	];

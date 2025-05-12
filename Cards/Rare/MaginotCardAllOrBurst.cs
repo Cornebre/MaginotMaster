@@ -116,7 +116,7 @@ internal sealed class MaginotCardAllOrBurst : Card, IRegisterable
 			num = s.ship.Get(Status.shield);
 			if (upgrade == Upgrade.B)
 			{
-				num += s.ship.Get(Status.tempShield);
+				num += s.ship.Get(Status.evade);
 			}
 			if (upgrade == Upgrade.A)
 			{

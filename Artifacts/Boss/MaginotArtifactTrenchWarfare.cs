@@ -8,7 +8,6 @@ namespace Cornebre.Maginot.Artifacts;
 
 public class MaginotArtifactTrenchWarfare : Artifact, IRegisterable
 {
-	private const int SideLength = 30;
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
 		helper.Content.Artifacts.RegisterArtifact(new ArtifactConfiguration
@@ -28,14 +27,15 @@ public class MaginotArtifactTrenchWarfare : Artifact, IRegisterable
 	public override void OnCombatStart(State state, Combat combat)
 	{
 		List<int> list = new List<int>();
-		for (int i = state.ship.x - SideLength; i < state.ship.x + state.ship.parts.Count() + SideLength; i++)
+		for (int i = state.ship.x - 1; i < state.ship.x + state.ship.parts.Count() + 1; i++)
 		{
 			if (!combat.stuff.ContainsKey(i))
 			{
 				list.Add(i);
 			}
 		}
-		foreach (int item in list)
+		List<int> list2 = list.Shuffle(state.rngActions).Take(4).ToList();
+		foreach (int item in list2)
 		{
 			combat.stuff.Add(item, new Asteroid
 			{
@@ -44,7 +44,10 @@ public class MaginotArtifactTrenchWarfare : Artifact, IRegisterable
 				xLerped = item
 			});
 		}
-		Pulse();
+		if (list2.Count > 0)
+		{
+			Pulse();
+		}
 	}
 	
 	public override List<Tooltip>? GetExtraTooltips()

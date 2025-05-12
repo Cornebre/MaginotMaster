@@ -27,7 +27,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 1,
+			cost = 2,
 			flippable = true
 		};
 	}

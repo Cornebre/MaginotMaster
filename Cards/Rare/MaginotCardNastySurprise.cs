@@ -43,7 +43,7 @@ internal sealed class MaginotCardNastySurprise : Card, IRegisterable
 			new AStatus
 			{
 				status = Status.shield,
-				statusAmount = 1,
+				statusAmount = 2,
 				targetPlayer = true
 			}
 		];

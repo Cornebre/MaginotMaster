@@ -18,17 +18,17 @@
 		},
 		"activeShielding": {
 			"name": "Active Shielding",
-			"desc": "Gains 1 <c=status>SHIELD</c> each time this ship is about to be hit. <c=downside>Decreases by 1 at end of turn.</c>"
+			"desc": "Gains 1 <c=status>SHIELD</c> each time this ship is about to be hit. <c=downside>Decreases by 1 at end of turn. Trigger only ONCE on multi-strike.</c>"
 		}
 	},
 	"action": {
 		"NastySurprise": {
 			"title": "Nasty Surprise",
-			"description": "Instantly turn every <c=midrow>objects in the midrow</c> into <c=drone>mines</c>."
+			"description": "Instantly turn every <c=midrow>object in the midrow</c> into <c=drone>mines</c>."
 		},
 		"ArtilleryAttack": {
 			"title": "Artillery Attack",
-			"description": "Attack that bypass <c=midrow>midrow objects</c> on its path. Bypassed <c=midrow>midrow objects</c> can't react to this attack."
+			"description": "Attack that bypass any <c=midrow>midrow object</c> on its path. Bypassed <c=midrow>midrow objects</c> can't react to this attack."
 		},
 		"MaxShieldHint": {
 			"description.hand": "X = your <c=status>TOTAL SHIELD CAPACITY</c> (<c=keyword>{0}</c>).",
@@ -121,11 +121,11 @@
 		},
 		"TrenchWarfare": {
 			"name": "TRENCH WARFARE",
-			"desc": "At the start of combat, fill the <c=midrow>midrow</c> with <c=drone>Asteroids</c>."
+			"desc": "Four <c=drone>Asteroids</c> will always be near your ship at the start of combat."
 		},
 		"ActiveShielding": {
 			"name": "ACTIVE SHIELDING",
-			"desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>Active Shielding</c>."
+			"desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>ACTIVE SHIELDING</c>."
 		},
 		"AutoCannon": {
 			"name": "AUTO CANNON",
@@ -133,7 +133,15 @@
 		},
 		"SafetyFuse": {
 			"name": "SAFETY FUSE",
-			"desc": "Reduce <c=drone>mines</c> damage to 0 when you destroy them."
+			"desc": "Reduce <c=drone>Mines</c>' damage to 0 when you destroy them. <c=downside>(Can still trigger weak!)</c>"
+		},
+		"MedalOfHonor": {
+			"name": "MEDAL OF HONOR",
+			"desc": "After gaining <c=status>SHIELD</c>, if you are at maximum shield, draw a card. Up to 3 times per turn."
+		},
+		"MomentumCollector": {
+			"name": "MOMENTUM COLLECTOR",
+			"desc": "Gain 1 <c=status>DRONESHIFT</c> every time a <c=drone>Mine</c> is destroyed."
 		}
 	}
 }

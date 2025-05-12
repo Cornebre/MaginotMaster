@@ -8,7 +8,7 @@ namespace Cornebre.Maginot.Artifacts;
 
 public class MaginotArtifactAutoCannon : Artifact, IRegisterable
 {
-	public int count;
+	public int count = 0;
 	private const int TRIGGER_POINT = 6;
 	public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
 	{
