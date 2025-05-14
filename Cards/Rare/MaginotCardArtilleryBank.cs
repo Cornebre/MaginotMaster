@@ -19,8 +19,8 @@ internal sealed class MaginotCardArtilleryBank : Card, IRegisterable
 				rarity = Rarity.rare,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryBank", "name"]).Localize
-			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryBank", "name"]).Localize,
+			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
 		});
 	}
 

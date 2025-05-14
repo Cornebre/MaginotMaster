@@ -18,8 +18,8 @@ internal sealed class MaginotCardMobileFort : Card, IRegisterable
 				rarity = Rarity.common,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "MobileFort", "name"]).Localize
-			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "MobileFort", "name"]).Localize,
+			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
 		});
 	}
 

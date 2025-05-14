@@ -19,8 +19,8 @@ internal sealed class MaginotCardCoverShot : Card, IRegisterable
 				rarity = Rarity.uncommon,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CoverShot", "name"]).Localize
-			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CoverShot", "name"]).Localize,
+			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
 		});
 	}
 
@@ -40,7 +40,7 @@ internal sealed class MaginotCardCoverShot : Card, IRegisterable
 			Upgrade.B => [
 				new MaginotActionArtilleryAttack
 				{
-					damage = GetDmg(s, 3),
+					damage = GetDmg(s, 2),
 				},
 				new ASpawn
 				{
@@ -54,13 +54,14 @@ internal sealed class MaginotCardCoverShot : Card, IRegisterable
 			_ => [
 				new MaginotActionArtilleryAttack
 				{
-					damage = GetDmg(s, upgrade == Upgrade.A ? 5 : 3),
+					damage = GetDmg(s, upgrade == Upgrade.A ? 3 : 2),
 				},
 				new ASpawn
 				{
 					thing = new Asteroid
 					{
 						yAnimation = 0.0,
+						bubbleShield = upgrade == Upgrade.A
 					},
 					offset = 1
 				}

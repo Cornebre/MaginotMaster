@@ -20,8 +20,8 @@ internal sealed class MAginotCardArtilleryShell : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B],
 				dontOffer = true
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryShell", "name"]).Localize
-			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryShell", "name"]).Localize,
+			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
 		});
 	}
 

@@ -123,14 +123,18 @@ internal class ModEntry : SimpleMod
 		 * The game uses the squint animation for the Extra-Planar Being and High-Pitched Static events, and the gameover animation while you are dying.
 		 * You may define any other animations, and they will only be used when explicitly referenced (such as dialogue).
 		 */
-		RegisterAnimation(package, "neutral", "assets/Animation/DaveNeutral", 4);
-		RegisterAnimation(package, "squint", "assets/Animation/DaveSquint", 4);
+		RegisterAnimation(package, "excited", "assets/Animation/maginot_excited_", 4);
+		RegisterAnimation(package, "frown", "assets/Animation/maginot_frown_", 4);
+		RegisterAnimation(package, "neutral", "assets/Animation/maginot_neutral_", 4);
+		RegisterAnimation(package, "reminicent", "assets/Animation/maginot_reminicent_", 4);
+		RegisterAnimation(package, "salute", "assets/Animation/maginot_salute_", 4);
+		RegisterAnimation(package, "squint", "assets/Animation/maginot_squint_", 4);
 		Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
 		{
 			CharacterType = MaginotDeck.Deck.Key(),
 			LoopTag = "gameover",
 			Frames = [
-				RegisterSprite(package, "assets/Animation/DaveGameOver.png").Sprite,
+				RegisterSprite(package, "assets/Animation/maginot_gameover.png").Sprite,
 			]
 		});
 		Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
@@ -138,7 +142,7 @@ internal class ModEntry : SimpleMod
 			CharacterType = MaginotDeck.Deck.Key(),
 			LoopTag = "mini",
 			Frames = [
-				RegisterSprite(package, "assets/Animation/DaveMini.png").Sprite,
+				RegisterSprite(package, "assets/Animation/maginot_mini.png").Sprite,
 			]
 		});
 

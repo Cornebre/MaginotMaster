@@ -18,8 +18,8 @@ internal sealed class MaginotCardPowerToShields : Card, IRegisterable
 				rarity = Rarity.common,
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
-			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "PowerToShields", "name"]).Localize
-			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
+			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "PowerToShields", "name"]).Localize,
+			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
 		});
 	}
 
@@ -43,14 +43,6 @@ internal sealed class MaginotCardPowerToShields : Card, IRegisterable
 					statusAmount = 3,
 					targetPlayer = true
 				},
-				new AStatus
-				{
-					status = Status.shield,
-					statusAmount = 5,
-					targetPlayer = true
-				}
-			],
-			Upgrade.B => [
 				new AStatus
 				{
 					status = Status.shield,

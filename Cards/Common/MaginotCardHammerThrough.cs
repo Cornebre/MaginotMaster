@@ -21,7 +21,7 @@ internal sealed class MaginotCardHammerThrough : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "HammerThrough", "name"]).Localize,
-			// Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Autotomy.png").Sprite
+			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
 		});
 	}
 
