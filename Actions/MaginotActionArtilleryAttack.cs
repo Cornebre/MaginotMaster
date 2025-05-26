@@ -60,24 +60,4 @@ public class MaginotActionArtilleryAttack : AAttack
 		};
 		return List;
 	}
-
-
-
-
-
-	// public override List<Tooltip> GetTooltips(State s)
-	// {
-	// 	List<Tooltip> List = base.GetTooltips(s);
-	// 	return
-	// 	[
-	// 		.. List,
-	// 		new GlossaryTooltip($"MaginotActionArtilleryAttack")
-	// 		{
-	// 			Icon = Spr,
-	// 			Title = ModEntry.Instance.Localizations.Localize(["action", "ArtilleryAttack", "title"]),
-	// 			TitleColor = Colors.card,
-	// 			Description = ModEntry.Instance.Localizations.Localize(["action", "ArtilleryAttack", "description"])
-	// 		},
-	// 	];
-	// }
 }

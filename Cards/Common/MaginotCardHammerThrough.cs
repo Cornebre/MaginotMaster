@@ -21,7 +21,7 @@ internal sealed class MaginotCardHammerThrough : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "HammerThrough", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchArtillery
 		});
 	}
 
@@ -29,7 +29,7 @@ internal sealed class MaginotCardHammerThrough : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 1,
+			cost = upgrade == Upgrade.B ? 2 : 1,
 			description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "HammerThrough", "description", upgrade.ToString()]), value)
 		};
 	}
@@ -48,12 +48,6 @@ internal sealed class MaginotCardHammerThrough : Card, IRegisterable
 					damage = GetDmg(s, value)
 				}
 			],
-			Upgrade.B => [
-				new MaginotActionArtilleryAttack
-				{
-					damage = GetDmg(s, value)
-				}
-			],
 			_ => [
 				new MaginotActionArtilleryAttack
 				{
@@ -65,7 +59,7 @@ internal sealed class MaginotCardHammerThrough : Card, IRegisterable
 	
 	public override void OnExitCombat(State s, Combat c)
 	{
-		value = 1;
+		value = upgrade == Upgrade.B ? 2 : 1;
 	}
 
 	public override void AfterWasPlayed(State state, Combat c)

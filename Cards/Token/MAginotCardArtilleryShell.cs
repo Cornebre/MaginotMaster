@@ -21,7 +21,7 @@ internal sealed class MAginotCardArtilleryShell : Card, IRegisterable
 				dontOffer = true
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryShell", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchArtillery
 		});
 	}
 

@@ -19,7 +19,7 @@ internal sealed class MaginotCardBunkerDown : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "BunkerDown", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchBunkerDown
 		});
 	}
 

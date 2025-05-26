@@ -19,7 +19,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "FrontLine", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchCaltrops
 		});
 	}
 
@@ -27,7 +27,7 @@ internal sealed class MaginotCardFrontLine : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 2,
+			cost = 1,
 			flippable = true
 		};
 	}

@@ -20,7 +20,7 @@ internal sealed class MaginotCardArtilleryBank : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ArtilleryBank", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchArtilleryBank
 		});
 	}
 
@@ -28,7 +28,7 @@ internal sealed class MaginotCardArtilleryBank : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 3,
+			cost = 2,
 			exhaust = upgrade != Upgrade.A
 		};
 	}

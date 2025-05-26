@@ -36,17 +36,5 @@ public class MaginotManagerAutoTempShield : IKokoroApi.IV2.IStatusRenderingApi.I
 		}
 		return false;
 	}
-	
-	public IReadOnlyList<Tooltip> OverrideStatusTooltips(IKokoroApi.IV2.IStatusRenderingApi.IHook.IOverrideStatusTooltipsArgs args) {
-		if (args.Status == ModEntry.Instance.MaginotManagerAutoTempShield.Status)
-		{
-			return [
-				..args.Tooltips,
-				new TTCard {
-					card = new MAginotCardArtilleryShell()
-				}
-		];}
-		return args.Tooltips;
-	}
 
 }

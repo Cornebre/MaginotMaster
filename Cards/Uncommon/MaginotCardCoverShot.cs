@@ -20,7 +20,7 @@ internal sealed class MaginotCardCoverShot : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "CoverShot", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchBuildUp
 		});
 	}
 
@@ -54,7 +54,7 @@ internal sealed class MaginotCardCoverShot : Card, IRegisterable
 			_ => [
 				new MaginotActionArtilleryAttack
 				{
-					damage = GetDmg(s, upgrade == Upgrade.A ? 3 : 2),
+					damage = GetDmg(s, 2),
 				},
 				new ASpawn
 				{

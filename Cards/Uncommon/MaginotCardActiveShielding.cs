@@ -19,7 +19,7 @@ internal sealed class MaginotCardActiveShielding : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "ActiveShielding", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchBunkerDown
 		});
 	}
 
@@ -27,7 +27,7 @@ internal sealed class MaginotCardActiveShielding : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = upgrade == Upgrade.None ? 1 : 0,
+			cost = 1,
 			recycle = upgrade == Upgrade.B,
 		};
 	}
@@ -38,7 +38,7 @@ internal sealed class MaginotCardActiveShielding : Card, IRegisterable
 			new AStatus
 			{
 				status = ModEntry.Instance.MaginotManagerActiveShielding.Status,
-				statusAmount = upgrade == Upgrade.B ? 1 : 2,
+				statusAmount = upgrade == Upgrade.A ? 2 : 1,
 				targetPlayer = true
 			}
 		];

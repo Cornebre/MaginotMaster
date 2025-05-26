@@ -25,6 +25,19 @@ internal class ModEntry : SimpleMod
 	internal IStatusEntry MaginotManagerActiveShielding;
 	internal IStatusEntry MaginotManagerAutoShield;
 	internal IStatusEntry MaginotManagerAutoTempShield;
+	internal Spr? FlenchBase;
+	internal Spr? FlenchArtillery;
+	internal Spr? FlenchCaltrops;
+	internal Spr? FlenchTwinArtillery;
+	internal Spr? FlenchBuildUp;
+	internal Spr? FlenchBunkerDown;
+	internal Spr? FlenchArtilleryBank;
+	internal Spr? FlenchAllOrBurst;
+	internal Spr? FlenchScare;
+	internal Spr? FlenchShield;
+	internal Spr? FlenchEMP;
+
+
 	internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
 	internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
 	internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
@@ -113,6 +126,17 @@ internal class ModEntry : SimpleMod
 			Name = AnyLocalizations.Bind(["character", "name"]).Localize
 		});
 
+		FlenchBase = RegisterSprite(package, "assets/Card/FlenchBase.png").Sprite;
+		FlenchArtillery = RegisterSprite(package, "assets/Card/FlenchArtillery.png").Sprite;
+		FlenchCaltrops = RegisterSprite(package, "assets/Card/FlenchCaltrops.png").Sprite;
+		FlenchTwinArtillery = RegisterSprite(package, "assets/Card/FlenchTwinArtillery.png").Sprite;
+		FlenchBuildUp = RegisterSprite(package, "assets/Card/FlenchBuildUp.png").Sprite;
+		FlenchBunkerDown = RegisterSprite(package, "assets/Card/FlenchBunkerDown.png").Sprite;
+		FlenchArtilleryBank = RegisterSprite(package, "assets/Card/FlenchArtilleryBank.png").Sprite;
+		FlenchAllOrBurst = RegisterSprite(package, "assets/Card/FlenchAllOrBurst.png").Sprite;
+		FlenchScare = RegisterSprite(package, "assets/Card/FlenchScare.png").Sprite;
+		FlenchShield = RegisterSprite(package, "assets/Card/FlenchShield.png").Sprite;
+		FlenchEMP = RegisterSprite(package, "assets/Card/FlenchEMP.png").Sprite;
 		foreach (var type in AllRegisterableTypes)
 			AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 		

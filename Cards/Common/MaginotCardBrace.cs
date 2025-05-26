@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
@@ -20,7 +19,7 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 				upgradesTo = [Upgrade.A, Upgrade.B]
 			},
 			Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Brace", "name"]).Localize,
-			Art = ModEntry.RegisterSprite(package, "assets/Card/Flench.png").Sprite
+			Art = ModEntry.Instance.FlenchShield
 		});
 	}
 
@@ -30,7 +29,8 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 		{
 			cost = 0,
 			infinite = upgrade == Upgrade.A,
-			retain = upgrade == Upgrade.B
+			retain = upgrade == Upgrade.B,
+			unplayable = upgrade == Upgrade.A && state.ship.Get(Status.shield) == 0,
 		};
 	}
 
@@ -46,7 +46,6 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 				{
 					status = Status.tempShield,
 					statusAmount = upgrade == Upgrade.B ? 3 : 2,
-					disabled = flipped,
 					targetPlayer = true
 				}
 			).AsCardAction,

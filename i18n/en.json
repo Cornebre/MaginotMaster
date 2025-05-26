@@ -6,15 +6,15 @@
 	"status": {
 		"artilleryBank": {
 			"name": "Artillery Bank",
-			"desc": "After drawing cards at the start of each turn, draw <c=keyword>{0}</c> <c=card>Artillery Shell</c>."
+			"desc": "Gain <c=keyword>{0}</c> <c=card>Artillery Shell</c> at the start of every turn."
 		},
 		"autoShield": {
 			"name": "Auto Shield",
-			"desc": "At the start of this ship's turn, gains <c=keyword>{0}</c> <c=status>SHIELD</c>."
+			"desc": "Gains <c=keyword>{0}</c> <c=status>SHIELD</c> at the start of every turn."
 		},
 		"autoTempShield": {
 			"name": "Auto Temp.Shield",
-			"desc": "At the start of this ship's turn, gains <c=keyword>{0}</c> <c=status>TEMP SHIELD</c>."
+			"desc": "Gains <c=keyword>{0}</c> <c=status>TEMP SHIELD</c> at the start of every turn."
 		},
 		"activeShielding": {
 			"name": "Active Shielding",
