@@ -3,6 +3,12 @@
 		"name": "Maginot",
 		"desc": "<c=d5c58a>MAGINOT</c>\nYour military advisor. His cards bring a lot of shield and midrow objects, with a dash of midrow ignoring weapons."
 	},
+	"ship": {
+		"maginotShip": {
+			"name": "Excelsior",
+			"desc": "Equiped with powerful but fragile intermix power generators in each wings, this ship is the definition of a glass cannon."
+		}
+	},
 	"status": {
 		"artilleryBank": {
 			"name": "Artillery Bank",
@@ -142,6 +148,14 @@
 		"MomentumCollector": {
 			"name": "MOMENTUM COLLECTOR",
 			"desc": "Gain 1 <c=status>DRONESHIFT</c> every time a <c=drone>Mine</c> is destroyed."
+		},
+		"IntermixChamber": {
+			"name": "INTERMIX CHAMBER",
+			"desc": "Gain 1 extra <c=energy>ENERGY</c> every turn. <c=downside>Your ship's wings become <c=parttrait>brittle</c> at the start of combat.</c>"
+		},
+		"ReinforcedIntermixChamber": {
+			"name": "REINFORCED INTERMIX CHAMBER",
+			"desc": "Replaces <c=artifact>INTERMIX CHAMBER</c>.\nGain 1 extra <c=energy>ENERGY</c> every turn. <c=downside>Your ship's wings become <c=parttrait>weak</c> at the start of combat.</c>"
 		}
 	}
 }

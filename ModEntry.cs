@@ -21,6 +21,7 @@ internal class ModEntry : SimpleMod
 	internal Harmony Harmony;
 	internal IKokoroApi.IV2 KokoroApi;
 	internal IDeckEntry MaginotDeck;
+	internal IShipEntry Maginot_Ship { get; }
 	internal IStatusEntry MaginotManagerArtilleryBank;
 	internal IStatusEntry MaginotManagerActiveShielding;
 	internal IStatusEntry MaginotManagerAutoShield;
@@ -89,9 +90,14 @@ internal class ModEntry : SimpleMod
 		typeof(MaginotArtifactMilitaryDiscount),
 		typeof(MaginotArtifactTrenchWarfare),
 	];
+	private static readonly List<Type> MaginotSpecialArtifacts = [
+		typeof(MaginotArtifactIntermixChamber),
+		typeof(MaginotArtifactReinforcedIntermixChamber),
+	];
 	private static readonly IEnumerable<Type> MaginotArtifactTypes =
 		MaginotCommonArtifacts
-			.Concat(MaginotBossArtifacts);
+			.Concat(MaginotBossArtifacts)
+			.Concat(MaginotSpecialArtifacts);
 
 	private static readonly IEnumerable<Type> AllRegisterableTypes =
 		MaginotCardTypes
@@ -169,6 +175,112 @@ internal class ModEntry : SimpleMod
 				RegisterSprite(package, "assets/Animation/maginot_mini.png").Sprite,
 			]
 		});
+
+		var maginotShipPartWing = helper.Content.Ships.RegisterPart("maginotPart.Wing", new PartConfiguration()
+		{
+			Sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Parts/wing_excelsior.png")).Sprite
+		});
+		var maginotShipPartCannon = helper.Content.Ships.RegisterPart("maginotPart.Cannon", new PartConfiguration()
+		{
+			Sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Parts/cannon_excelsior.png")).Sprite
+		});
+		var maginotShipPartMissiles = helper.Content.Ships.RegisterPart("maginotPart.Missiles", new PartConfiguration()
+		{
+			Sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Parts/missiles_excelsior.png")).Sprite
+		});
+		var maginotShipPartCockpit = helper.Content.Ships.RegisterPart("maginotPart.Cockpit", new PartConfiguration()
+		{
+			Sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Parts/cockpit_excelsior.png")).Sprite
+		});
+		var maginotShipPartScaffolding = helper.Content.Ships.RegisterPart("maginotPart.Scaffolding", new PartConfiguration()
+		{
+			Sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Parts/scaffolding_excelsior.png")).Sprite
+		});
+
+		var maginotShipSpriteChassis = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/Parts/chassis_excelsior.png")).Sprite;
+
+		/* With the parts and sprites done, we can now create our Ship a bit more easily */
+		Maginot_Ship = helper.Content.Ships.RegisterShip("maginotShip", new ShipConfiguration()
+		{
+			Ship = new StarterShip()
+			{
+				ship = new Ship()
+				{
+					/* This is how much hull the ship will start a run with. We recommend matching hullMax */
+					hull = 12,
+					hullMax = 12,
+					shieldMaxBase = 5,
+					parts =
+					{
+						/* This is the order in which the ship parts will be arranged in-game, from left to right. Part1 -> Part2 -> Part3 */
+						new Part
+						{
+							type = PType.wing,
+							skin = maginotShipPartWing.UniqueName,
+							damageModifier = PDamMod.brittle
+						},
+						new Part
+						{
+							type = PType.empty,
+							skin = maginotShipPartScaffolding.UniqueName,
+						},
+						new Part
+						{
+							type = PType.missiles,
+							skin = maginotShipPartMissiles.UniqueName,
+						},
+						new Part
+						{
+							type = PType.cockpit,
+							skin = maginotShipPartCockpit.UniqueName,
+						},
+						new Part
+						{
+							type = PType.cannon,
+							skin = maginotShipPartCannon.UniqueName,
+							flip = true,
+						},
+						new Part
+						{
+							type = PType.empty,
+							skin = maginotShipPartScaffolding.UniqueName,
+							flip = true,
+						},
+						new Part
+						{
+							type = PType.wing,
+							skin = maginotShipPartWing.UniqueName,
+							flip = true,
+							damageModifier = PDamMod.brittle
+						}
+					}
+				},
+
+				/* These are cards and artifacts the ship will start a run with. The recommended card amount is 4, and the recommended artifact amount is 2 to 3 */
+				cards =
+				{
+					new CannonColorless(),
+					new CannonColorless(),
+					new DodgeColorless(),
+					new BasicShieldColorless(),
+				},
+				artifacts =
+				{
+					new ShieldPrep(),
+					new MaginotArtifactIntermixChamber(),
+				}
+			},
+			ExclusiveArtifactTypes = new HashSet<Type>()
+			{
+				typeof(MaginotArtifactIntermixChamber),
+				typeof(MaginotArtifactReinforcedIntermixChamber),
+			},
+
+			UnderChassisSprite = maginotShipSpriteChassis,
+			Name = AnyLocalizations.Bind(["ship", "maginotShip", "name"]).Localize,
+			Description = AnyLocalizations.Bind(["ship", "maginotShip", "desc"]).Localize
+		});
+
 
 		helper.Content.Characters.V2.RegisterPlayableCharacter("Maginot", new PlayableCharacterConfigurationV2
 		{
