@@ -64,14 +64,15 @@ internal class ModEntry : SimpleMod
 		typeof(MaginotCardTwinArtillery),
 	];
 	private static readonly List<Type> MaginotRareCardTypes = [
-		typeof (MaginotCardAllOrBurst),
-		typeof (MaginotCardArtilleryBank),
-		typeof (MaginotCardArtilleryBarrage),
-		typeof (MaginotCardNastySurprise),
-		typeof (MaginotCardScareTactics),
+		typeof(MaginotCardAllOrBurst),
+		typeof(MaginotCardArtilleryBank),
+		typeof(MaginotCardArtilleryBarrage),
+		typeof(MaginotCardNastySurprise),
+		typeof(MaginotCardScareTactics),
 	];
 	private static readonly List<Type> MaginotSpecialCardTypes = [
-		typeof (MAginotCardArtilleryShell),
+		typeof(MAginotCardArtilleryShell),
+		typeof(MaginotCardMaginotEXE),
 	];
 	private static readonly IEnumerable<Type> MaginotCardTypes =
 		MaginotCommonCardTypes
@@ -295,6 +296,18 @@ internal class ModEntry : SimpleMod
 				artifacts = [
 				]
 			},
+			SoloStarters = new StarterDeck
+			{
+				cards = [
+					new MaginotCardBuildUp(),
+					new MaginotCardHeavyCaltrops(),
+					new MaginotCardMobileFort(),
+					new MaginotCardPowerToShields(),
+					new CannonColorless(),
+					new CannonColorless()
+				]
+			},
+			ExeCardType = typeof(MaginotCardMaginotEXE),
 			Description = AnyLocalizations.Bind(["character", "desc"]).Localize
 		});
 

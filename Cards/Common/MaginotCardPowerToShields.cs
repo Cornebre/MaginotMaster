@@ -46,7 +46,13 @@ internal sealed class MaginotCardPowerToShields : Card, IRegisterable
 				new AStatus
 				{
 					status = Status.shield,
-					statusAmount = 5,
+					statusAmount = 3,
+					targetPlayer = true
+				},
+				new AStatus
+				{
+					status = Status.shield,
+					statusAmount = 3,
 					targetPlayer = true
 				}
 			],
@@ -54,7 +60,13 @@ internal sealed class MaginotCardPowerToShields : Card, IRegisterable
 				new AStatus
 				{
 					status = Status.shield,
-					statusAmount = 5,
+					statusAmount = 3,
+					targetPlayer = true
+				},
+				new AStatus
+				{
+					status = Status.shield,
+					statusAmount = 3,
 					targetPlayer = true
 				}
 			]

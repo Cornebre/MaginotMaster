@@ -34,7 +34,7 @@
 		},
 		"ArtilleryAttack": {
 			"title": "Artillery Attack",
-			"description": "Attack that bypass any <c=midrow>midrow object</c> on its path. Bypassed <c=midrow>midrow objects</c> can't react to this attack."
+			"description": "Attack that bypass any <c=midrow>midrow object</c> on its path.\nBypassing a midrow object increase the attack damage by <c=keyword>1</c>.\nBypassed <c=midrow>midrow objects</c> can't react to this attack."
 		},
 		"MaxShieldHint": {
 			"description.hand": "X = your <c=status>TOTAL SHIELD CAPACITY</c> (<c=keyword>{0}</c>).",
@@ -52,7 +52,7 @@
 			"name": "Build Up"
 		},
 		"Brace": {
-			"name": "Brace"
+			"name": "Brace for Impact"
 		},
 		"BunkerDown": {
 			"name": "Bunker Down"
@@ -118,7 +118,11 @@
 		"Pavis": {
 			"name": "Pavis",
 			"description": "Temporary Shield = total dmg of enemy's cannon attack: <c=keyword>{0}</c>."
+		},
+		"MaginotEXE": {
+			"name": "Maginot.EXE"
 		}
+
 	},
 	"artifact": {
 		"MilitaryDiscount": {

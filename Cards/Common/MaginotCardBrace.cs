@@ -30,7 +30,7 @@ internal sealed class MaginotCardBrace : Card, IRegisterable
 			cost = 0,
 			infinite = upgrade == Upgrade.A,
 			retain = upgrade == Upgrade.B,
-			unplayable = upgrade == Upgrade.A && state.ship.Get(Status.shield) == 0,
+			unplayable = upgrade == Upgrade.A && state.ship.Get(Status.shield) == 0 && state.route is Combat combat,
 		};
 	}
 

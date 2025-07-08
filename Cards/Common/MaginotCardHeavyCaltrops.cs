@@ -27,8 +27,7 @@ internal sealed class MaginotCardHeavyCaltrops : Card, IRegisterable
 	{
 		return new CardData
 		{
-			cost = 2,
-			flippable = true
+			cost = 2
 		};
 	}
 

@@ -29,6 +29,7 @@ public class ArtilleryShotController
 				{
 					__state = Mutil.DeepCopy(value);
 					c.stuff.Remove(num.Value);
+					__instance.damage += 1;
 				}
 			}
 		}

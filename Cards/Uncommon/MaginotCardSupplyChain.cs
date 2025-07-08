@@ -40,7 +40,7 @@ internal sealed class MaginotCardSupplyChain : Card, IRegisterable
 				new AStatus
 				{
 					status = ModEntry.Instance.MaginotManagerAutoShield.Status,
-					statusAmount = 2,
+					statusAmount = 3,
 					targetPlayer = true
 				}
 			],

@@ -24,6 +24,7 @@ public class MaginotActionArtilleryAttack : AAttack
 			{
 				stuffBase = Mutil.DeepCopy(value);
 				c.stuff.Remove(num.Value);
+				damage += 1;
 			}
 		}
 		base.Begin(g, s, c);

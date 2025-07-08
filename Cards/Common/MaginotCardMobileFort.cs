@@ -45,7 +45,7 @@ internal sealed class MaginotCardMobileFort : Card, IRegisterable
 			new AStatus
 			{
 				status = Status.droneShift,
-				statusAmount = 2,
+				statusAmount = 3,
 				targetPlayer = true
 			}
 		];
